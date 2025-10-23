@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yashiv Arora — Software Developer Portfolio</title>
+  <meta name="description" content="Portfolio website for Yashiv Arora — software developer focused on Angular, .NET, and data-driven apps." />
+  <meta property="og:title" content="Yashiv Arora — Portfolio" />
+  <meta property="og:description" content="Projects, skills, education, and resume." />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg2: #0e162a;
+      --text: #e6eefc;
+      --muted: #a8b3cf;
+      --brand: #7aa2ff;
+      --brand-2: #64d4ff;
+      --card: #121a30;
+      --border: #23304f;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --max: 1080px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* Top disclaimer */
+    .banner {
+      background: linear-gradient(90deg, var(--warn), #ff7a7a);
+      color: #0b0b0b;
+      padding: 10px 16px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .banner a { color: #0b0b0b; text-decoration: underline; }
+
+    header {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(8px);
+      background: rgba(11,18,32,.55);
+      border-bottom: 1px solid var(--border);
+    }
+    nav { max-width: var(--max); margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-weight: 700; letter-spacing: .3px; }
+    .brand span { color: var(--brand); }
+    .navlinks { display: flex; gap: 18px; }
+    .navlinks a { color: var(--muted); text-decoration: none; font-weight: 500; }
+    .navlinks a:hover { color: var(--text); }
+
+    .container { max-width: var(--max); margin: 0 auto; padding: 28px 20px 80px; }
+    .hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; align-items: center; margin-top: 24px; }
+    .hero-card {
+      background: radial-gradient(1200px 600px at -10% -10%, rgba(122,162,255,.12), transparent 50%),
+                  radial-gradient(1000px 500px at 110% 10%, rgba(100,212,255,.12), transparent 50%),
+                  var(--card);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; }
+    .hero p { color: var(--muted); margin: 0 0 18px; }
+    .chip { display: inline-block; border: 1px solid var(--border); background: rgba(255,255,255,.03); padding: 6px 10px; border-radius: 999px; font-size: 12px; margin-right: 8px; }
+    .actions { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+    .btn { appearance: none; border: 1px solid var(--border); background: #151e37; color: var(--text); padding: 11px 16px; border-radius: 12px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn.primary { background: linear-gradient(90deg, var(--brand), var(--brand-2)); color: #0b0b0b; border-color: transparent; }
+
+    section { margin-top: 44px; }
+    h2 { font-size: clamp(20px, 3vw, 28px); margin: 0 0 14px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card { grid-column: span 12; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+
+    /* Skills */
+    .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .skill { background: #0f172a; border: 1px dashed var(--border); border-radius: var(--radius-sm); padding: 14px; }
+    .skill h3 { margin: 0 0 8px; font-size: 16px; }
+    .pillset { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill { border: 1px solid var(--border); border-radius: 999px; padding: 6px 10px; font-size: 12px; color: var(--muted); background: rgba(255,255,255,.02); }
+
+    /* Projects */
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .project { background: #0f1a31; border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; }
+    .project h3 { margin: 0 0 10px; font-size: 18px; }
+    .project p { color: var(--muted); margin: 0 0 12px; }
+    .meta { font-size: 12px; color: var(--muted); margin-top: auto; }
+
+    /* Education */
+    .edu { display: grid; gap: 10px; }
+    .edu-item { background: #0f172a; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; }
+
+    /* Resume */
+    .resume { background: linear-gradient(90deg, rgba(122,162,255,.1), rgba(100,212,255,.08)); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+
+    /* Contact */
+    .contact { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .field { display: grid; gap: 6px; }
+    .field input, .field textarea { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: #0b1220; color: var(--text); }
+    .field input:focus, .field textarea:focus { outline: 2px solid var(--brand); border-color: transparent; }
+
+    footer { margin-top: 60px; padding: 30px 20px; border-top: 1px solid var(--border); color: var(--muted); text-align: center; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    /* Print-friendly tweaks for assignment submission screenshots */
+    @media print {
+      header, .banner, .actions, .contact form { display: none !important; }
+      body { background: white; color: black; }
+      .card, .project, .edu-item, .resume { border: 1px solid #999 !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Temporary assignment banner -->
+  <div class="banner" role="note" aria-label="assignment notice">
+    This site was created temporarily for an assignment. My main portfolio will be at
+    <a href="#" aria-label="external portfolio link">(add your real URL)</a>.
+  </div>
+
+  <header>
+    <nav aria-label="Primary">
+      <div class="brand">Yashiv <span>Arora</span></div>
+      <div class="navlinks">
+        <a href="#summary">Summary</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- HERO / SUMMARY -->
+    <section id="summary" class="hero" aria-labelledby="summary-title">
+      <div class="hero-card">
+        <h1 id="summary-title">Software Developer focused on Angular, .NET, and data-driven apps</h1>
+        <p>
+          I build responsive, accessible web apps with clean architecture. I enjoy turning complex workflows into simple, reliable user experiences and shipping features that matter.
+        </p>
+        <div>
+          <span class="chip">Angular</span>
+          <span class="chip">.NET 8</span>
+          <span class="chip">Azure</span>
+          <span class="chip">SQL Server</span>
+          <span class="chip">Testing</span>
+        </div>
+        <div class="actions">
+          <a class="btn primary" href="#projects">View Projects</a>
+          <a class="btn" href="#contact">Contact Me</a>
+        </div>
+      </div>
+      <div class="card" aria-label="quick facts">
+        <h2 style="margin-top:0">Quick Facts</h2>
+        <ul>
+          <li>Jr. Technical Analyst (co‑op), Ministry of Transportation — Digital Solutions Branch</li>
+          <li>Experience with Azure Test Plans, Angular, .NET APIs, SQL Server, Selenium</li>
+          <li>Comfortable with Git, Agile practices, and code reviews</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" aria-labelledby="edu-title">
+      <h2 id="edu-title">Education</h2>
+      <div class="edu">
+        <div class="edu-item">
+          <strong>Mohawk College — Post‑Secondary (Fall 2025)</strong><br>
+          Coursework: Data Structures & Algorithms, Cloud Computing (Azure), Web Design (WordPress), Project Management.
+        </div>
+        <div class="edu-item">
+          <strong>Self‑Study</strong><br>
+          Angular best practices, .NET 8 Web APIs, testing (Jest/Jasmine, xUnit), CI/CD fundamentals.
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" aria-labelledby="skills-title">
+      <h2 id="skills-title">Skills</h2>
+      <div class="skills">
+        <div class="skill">
+          <h3>Frontend</h3>
+          <div class="pillset">
+            <span class="pill">Angular</span>
+            <span class="pill">TypeScript</span>
+            <span class="pill">RxJS</span>
+            <span class="pill">HTML5</span>
+            <span class="pill">SCSS</span>
+            <span class="pill">Accessibility (WCAG)</span>
+          </div>
+        </div>
+        <div class="skill">
+          <h3>Backend</h3>
+          <div class="pillset">
+            <span class="pill">.NET 8 Web API</span>
+            <span class="pill">Entity Framework</span>
+            <span class="pill">REST</span>
+            <span class="pill">MediatR</span>
+          </div>
+        </div>
+        <div class="skill">
+          <h3>Data & Cloud</h3>
+          <div class="pillset">
+            <span class="pill">SQL Server</span>
+            <span class="pill">Azure (Key Vault, Pipelines)</span>
+            <span class="pill">Testing (Azure Test Plans)</span>
+          </div>
+        </div>
+        <div class="skill">
+          <h3>Tools</h3>
+          <div class="pillset">
+            <span class="pill">Git/GitHub</span>
+            <span class="pill">Postman</span>
+            <span class="pill">VS / VS Code</span>
+            <span class="pill">Figma</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Projects</h2>
+      <div class="projects">
+        <article class="project" aria-labelledby="p1-title">
+          <h3 id="p1-title">Cable Locate — Contact Details & Map Workflows</h3>
+          <p>Angular components and .NET APIs for a public‑facing form: dynamic validation, screenshot attachments, and confirmation dialogs; fail‑safe fallbacks for ArcGIS outages.</p>
+          <p class="meta">Tech: Angular, .NET 8, SQL Server, Azure</p>
+          <div class="actions">
+            <a class="btn" href="#" aria-label="project link placeholder">Code (private/placeholder)</a>
+          </div>
+        </article>
+        <article class="project" aria-labelledby="p2-title">
+          <h3 id="p2-title">Hamilton Explorer — Map Application</h3>
+          <p>Bootstrap + JS app integrating Geolocation and geocoding with an interactive map, custom markers, and responsive layout.</p>
+          <p class="meta">Tech: JS, Bootstrap, Web APIs</p>
+          <div class="actions">
+            <a class="btn" href="#" aria-label="live demo placeholder">Live Demo</a>
+            <a class="btn" href="#" aria-label="github repository placeholder">GitHub</a>
+          </div>
+        </article>
+        <article class="project" aria-labelledby="p3-title">
+          <h3 id="p3-title">My Work Search Optimizer (Pretend)</h3>
+          <p>Pseudo project: profile and refactor LINQ queries in a large search repository; add paging and index‑friendly filters to reduce query time from 1.8s → 250ms.</p>
+          <p class="meta">Tech: .NET, EF Core, SQL indexing</p>
+        </article>
+        <article class="project" aria-labelledby="p4-title">
+          <h3 id="p4-title">Route Numbers Service (Pretend)</h3>
+          <p>Pseudo project: predictive dropdown backed by ArcGIS via an API gateway; resilient caching + local fallback table when external calls fail.</p>
+          <p class="meta">Tech: .NET, Caching, ArcGIS</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume" aria-labelledby="resume-title">
+      <h2 id="resume-title">Resume</h2>
+      <div class="resume">
+        <p>
+          Download my resume as a PDF:
+          <a href="resume.pdf" download>resume.pdf</a>
+          <span aria-hidden="true">→</span>
+          <small style="color:var(--muted)">(place your real PDF in the repository as <code>resume.pdf</code>)</small>
+        </p>
+        <ul>
+          <li>Co‑op: Jr. Technical Analyst, Digital Solutions Branch</li>
+          <li>Key contributions: test case design, Angular front‑end, .NET APIs, exception handling and fallbacks</li>
+          <li>Soft skills: communication, iterative delivery, ownership</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <div class="grid">
+        <div class="card">
+          <p>Email: <a href="mailto:yashiv.arora@example.com">yashiv.arora@example.com</a></p>
+          <p>GitHub: <a href="https://github.com/your-username" target="_blank" rel="noreferrer">github.com/your-username</a></p>
+          <p>LinkedIn: <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noreferrer">linkedin.com/in/your-handle</a></p>
+        </div>
+        <div class="card">
+          <form class="contact" action="mailto:yashiv.arora@example.com" method="post" enctype="text/plain">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" name="email" placeholder="you@example.com" required />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="How can I help?" required></textarea>
+            </div>
+            <button class="btn primary" type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Yashiv Arora. Built with semantic HTML & CSS. Hosted on GitHub Pages.
+  </footer>
+
+  <script>
+    // tiny enhancement: current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
